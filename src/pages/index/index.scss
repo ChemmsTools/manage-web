@@ -9,18 +9,4 @@ body {
 
     display: flex;
     flex-direction: column;
-
-    .main {
-        flex-grow: 1;
-
-        display: flex;
-
-        .left {
-            box-sizing: border-box;
-            height: 100%;
-            width: 240px;
-            border-right: 0.5px solid rgba(0, 0, 0, 0.12);
-        }
-    }
-
 }
