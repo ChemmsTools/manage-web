@@ -21,8 +21,8 @@ export default class Index extends React.Component {
         })
 
         // 从 Heder 组件接收到用户想要返回的请求，渲染 Sider、Content 组件
-        PubSub.subscribe('wantReturnFlag', (msg, wantLogin) => {
-            this.setState({ wantLogin })
+        PubSub.subscribe('wantShowWelcome', (msg, text) => {
+            this.setState({ wantLogin: false })
         })
 
         // 从 Login 组件接收到用户登录成功的信息，渲染 Content 组件

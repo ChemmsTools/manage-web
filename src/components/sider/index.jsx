@@ -40,6 +40,11 @@ export default class Sider extends React.Component {
         PubSub.publish('siderToContent', m.key)
     }
 
+    componentDidMount() {
+        PubSub.subscribe('wantShowWelcome', (msg, text) => {
+            this.setState({ openKeys: [] })
+        })
+    }
 
     render() {
         const { openKeys } = this.state
