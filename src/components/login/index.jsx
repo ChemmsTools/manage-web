@@ -4,6 +4,7 @@ import { UserOutlined } from '@ant-design/icons';
 import PubSub from 'pubsub-js'
 import MD5 from 'md5.js'
 import './index.scss'
+import 'antd/dist/antd.css'
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -45,8 +46,11 @@ export default class Login extends React.Component {
             message.loading('正在登录...', () => {
                 message.destroy()
                 message.success('登录成功！', () => {
+                    // 向 index 页面传递登录成功提示，使其重新渲染页面
                     // 这里传 false 表示登录成功，离开登录页面
                     PubSub.publish('loginSuccessFlag', false)
+
+                    // 向 Header 组件传递 username，用于展示
                     PubSub.publish('username', username)
                 })
             });
