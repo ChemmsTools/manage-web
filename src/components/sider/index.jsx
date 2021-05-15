@@ -1,50 +1,58 @@
 import React from 'react'
 import { Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, DatabaseOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css'
 import './index.scss'
 
 const { SubMenu } = Menu;
 
-// submenu keys of first level
-const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
+export default class Sider extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            // 所有 Submenu 组件的key值数组
+            allSubmenuKeys: ['tools', 'components'],
 
-const Sider = () => {
-  const [openKeys, setOpenKeys] = React.useState(['sub1']);
-
-  const onOpenChange = keys => {
-    const latestOpenKey = keys.find(key => openKeys.indexOf(key) === -1);
-    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-      setOpenKeys(keys);
-    } else {
-      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+            // 当前展开的 SubMenu 组件的 key 值数组，默认情况不展开
+            openKeys: []
+        }
     }
-  };
 
-  return (
-    <Menu mode="inline" openKeys={openKeys} onOpenChange={onOpenChange} style={{ width: 240 }}>
-      <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-        <Menu.Item key="1">Option 1</Menu.Item>
-        <Menu.Item key="2">Option 2</Menu.Item>
-        <Menu.Item key="3">Option 3</Menu.Item>
-        <Menu.Item key="4">Option 4</Menu.Item>
-      </SubMenu>
-      <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-        <Menu.Item key="5">Option 5</Menu.Item>
-        <Menu.Item key="6">Option 6</Menu.Item>
-        <SubMenu key="sub3" title="Submenu">
-          <Menu.Item key="7">Option 7</Menu.Item>
-          <Menu.Item key="8">Option 8</Menu.Item>
-        </SubMenu>
-      </SubMenu>
-      <SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
-        <Menu.Item key="9">Option 9</Menu.Item>
-        <Menu.Item key="10">Option 10</Menu.Item>
-        <Menu.Item key="11">Option 11</Menu.Item>
-        <Menu.Item key="12">Option 12</Menu.Item>
-      </SubMenu>
-    </Menu>
-  );
-};
+    // keys：当前展开的 SubMenu 菜单项 key 数组
+    onOpenChange = (keys) => {
+        const { allSubmenuKeys, openKeys } = this.state
 
-export default Sider
+        const latestOpenKey = keys.find(key => openKeys.indexOf(key) === -1);
+
+        if (allSubmenuKeys.indexOf(latestOpenKey) === -1) {
+            this.setState({ openKeys: keys })
+        } else {
+            const temp = latestOpenKey ? [latestOpenKey] : []
+            this.setState({ openKeys: temp })
+        }
+    };
+
+
+    render() {
+        const { openKeys } = this.state
+
+        return (
+            <div className="sider-container">
+                <Menu mode="inline" openKeys={openKeys} onOpenChange={this.onOpenChange} style={{ width: "100%" }}>
+                    <SubMenu key="tools" icon={<DatabaseOutlined />} title="工具">
+                        <Menu.Item key="tools_1">Option 1</Menu.Item>
+                        <Menu.Item key="tools_2">Option 2</Menu.Item>
+                    </SubMenu>
+                    <SubMenu key="components" icon={<AppstoreOutlined />} title="组件">
+                        <Menu.Item key="components_1">Option 3</Menu.Item>
+                        <Menu.Item key="components_2">Option 4</Menu.Item>
+                        <SubMenu key="components_3" title="小组件">
+                            <Menu.Item key="components_3_1">Option 5</Menu.Item>
+                            <Menu.Item key="components_3_2">Option 6</Menu.Item>
+                        </SubMenu>
+                    </SubMenu>
+                </Menu>
+            </div>
+        )
+    }
+}
