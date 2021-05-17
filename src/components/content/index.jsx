@@ -11,15 +11,20 @@ export default class Content extends React.Component {
     }
 
     componentDidMount() {
-        // 从 Sider 组件订阅信息，展示对应的内容
+        // From：Sider 展示对应的内容
         PubSub.subscribe('siderToContent', (msg, text) => {
             this.setState({ text })
         })
 
-        // 此部分 Header 组件订阅消息，展示欢迎页
-        PubSub.subscribe('wantShowWelcome', (msg, text) => {
+        // From：Header 显示欢迎页
+        PubSub.subscribe('wantReturnIndex', (msg, text) => {
             this.setState({ text })
         })
+    }
+
+    componentWillUnmount() {
+        PubSub.unsubscribe('siderToContent')
+        PubSub.unsubscribe('wantReturnIndex')
     }
 
     render() {

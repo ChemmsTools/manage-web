@@ -10,23 +10,19 @@ export default class Header extends React.Component {
     this.state = {
       // 用户是否登录
       isLogin: false,
-
       username: ''
     };
   }
 
-  /* 1.若在登录页：向 index 页面请求返回首页
-   * 并且向 Content 组件请求，使其显示欢迎内容
-   * 2. 若不在，直接请求 Content 组件展示即可
-   * 同时请求 Sider 组件使其闭合全部菜单
-   */
+  // 关闭所有菜单，显示欢迎页
   returnIndex = () => {
-    PubSub.publish('wantShowWelcome', '')
+    // To：Sider、Content
+    PubSub.publish('wantReturnIndex', '')
   }
 
-  // 点击按钮，向 index 页面请求登录，使其渲染 Login 组件
+  // 跳转到 SSO 登陆页面
   wantLogin = () => {
-    PubSub.publish('wantloginFlag', true)
+    window.location.href = "http://login.sso.midgroup.cn/"
   }
 
   // 退出登录
@@ -43,13 +39,6 @@ export default class Header extends React.Component {
         this.setState({ isLogin: false })
       })
     });
-  }
-
-  componentDidMount() {
-    // 接收 Login 组件传回的username
-    PubSub.subscribe('username', (msg, username) => {
-      this.setState({ username, isLogin: true })
-    })
   }
 
   render() {

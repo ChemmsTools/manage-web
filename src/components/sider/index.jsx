@@ -36,14 +36,19 @@ export default class Sider extends React.Component {
 
     // 点击后 Content 组件进行对应内容响应
     showContent = (m) => {
-        // 向 Content 组件传递选择的内容，使其展示对应信息
+        // To：Content 使其展示对应信息
         PubSub.publish('siderToContent', m.key)
     }
 
     componentDidMount() {
-        PubSub.subscribe('wantShowWelcome', (msg, text) => {
+        // From：Header 关闭所有菜单
+        PubSub.subscribe('wantReturnIndex', (msg, text) => {
             this.setState({ openKeys: [] })
         })
+    }
+
+    componentWillUnmount(){
+        PubSub.unsubscribe('wantReturnIndex')
     }
 
     render() {
