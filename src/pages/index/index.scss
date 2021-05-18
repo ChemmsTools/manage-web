@@ -1,7 +1,18 @@
-.container {
-  width: 100vh;
-  text-align: center;
-  font-size: 100px;
-  color: #88f2fa;
+body {
+    margin: 0;
 }
 
+.index-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(250, 250, 250);
+
+    display: flex;
+    flex-direction: column;
+
+    .main {
+        flex-grow: 1;
+
+        display: flex;
+    }
+}

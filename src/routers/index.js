@@ -1,5 +1,5 @@
 /*
- * @LastEditors: caizichen1
+ * @LastEditors: GUI
  */
 import Loadable from 'react-loadable';
 
@@ -16,7 +16,6 @@ const routes = [
   // 默认路由
   { path: '/', component: page('index') },
   { path: '/index', component: page('index') },
-  { path: '/admin', component: page('admin') },
 ];
 
 export default routes;

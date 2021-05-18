@@ -1,7 +1,77 @@
-.container {
-  width: 100vh;
-  text-align: center;
-  font-size: 100px;
-  color: #88f2fa;
-}
+.header-container {
+  min-height: 64px;
+  padding: 0 24px 0 24px;
+  background-color: rgb(63, 81, 181);
 
+  display: flex;
+  align-items: center;
+
+  .title-ico {
+    margin-left: 20px;
+
+    width: 44px;
+    height: 44px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50px;
+
+    cursor: pointer;
+  }
+
+  .title-name {
+    font-size: 18px;
+    color: white;
+    margin-left: 15px;
+  }
+
+  .accout {
+    flex-grow: 1;
+    height: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .did-login {
+        display: flex;
+        align-items: center;
+
+        .welcome {
+            margin-right: 30px;
+
+            letter-spacing: 1px;
+            font-size: 19px;
+            color: white;
+        }
+
+        .exit {
+            padding: 2px 15px;
+            margin-right: 20px;
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            &:hover {
+                color: yellow;
+                background-color: rgb(80, 95, 180);
+            }
+        }
+    }
+
+    .user-login-btn {
+        box-sizing: border-box;
+        height: 48px;
+        width: 48px;
+        padding: 9px;
+        margin-right: 20px;
+        border-radius: 24px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(80, 95, 180);
+        }
+    }
+}
+}

@@ -1,16 +1,25 @@
-import React from 'react';
+import React from 'react'
+import Header from '../../components/header'
+import Sider from '../../components/sider'
+import Content from '../../components/content'
 import './index.scss'
 
 export default class Index extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
+    constructor() {
+        super()
+        this.state = {
+        }
+    }
 
-  render() {
-    return (
-      <div className='container'>脚手架模板</div>
-    );
-  }
+    render() {
+        return (
+            <div className="index-container">
+                <Header />
+                <div className="main">
+                    <Sider />
+                    <Content />
+                </div>
+            </div>
+        )
+    }
 }
