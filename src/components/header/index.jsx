@@ -22,7 +22,7 @@ export default class Header extends React.Component {
 
   // 跳转到 SSO 登陆页面
   wantLogin = () => {
-    window.location.href = "http://sso.midgroup.cn/#/index"
+    window.location.href = "http://login.sso.midgroup.cn/#/login?appid=a253790c-74d5-4391-9d49-2bef49690f5d&callback=&scope=read&type=code"
   }
 
   // 退出登录
