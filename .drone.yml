@@ -1,0 +1,51 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: node-build
+    pull: if-not-exists
+    image: node:14-alpine
+    volumes:
+      - name: node_modules_cache
+        path: /drone/src/node_modules
+      - name: bulid
+        path: /data/tmp
+      - name: logs
+        path: /root/.npm/_logs/
+    commands:
+      - rm -rf package-lock.json
+      - ls
+      - npm config set registry https://registry.npm.taobao.org
+      - npm install
+      - npm cache clear --force
+      - npm rebuild node-sass
+      - npm install
+      - npm run build
+
+  - name: upload-build
+    image: appleboy/drone-scp
+    settings:
+      host: 
+        from_secret: host_ip
+      port: 22
+      username: pipeuser
+      password:
+        from_secret: ssh_password
+      target: /home/nginx/web/chemmstools-manage  #目标文件夹
+      source: build # 当前目录build文件夹
+      rm: true
+    when:
+      event: [ push, pull_request ]
+      branch: [ master ]
+
+volumes:
+  - name: node_modules_cache # The name use in this pipeline,
+    host:
+      path: /home/drone/node-cache/node_modules  # The path be used in the host.
+  - name: bulid # The name use in this pipeline,
+    host:
+      path: /home/nginx/web/ssologin  # The path be used in the host.
+  - name: logs # The name use in this pipeline,
+    host:
+      path: /home/drone/node-cache/logs  # The path be used in the host.
